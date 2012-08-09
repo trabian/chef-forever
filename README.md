@@ -34,3 +34,10 @@ forever_service "statsd" do
 end
 
 ```
+
+## License and Author
+
+License: [MIT](https://github.com/trabian/chef-forever/blob/master/LICENSE)
+
+Author: [David Radcliffe][dwradcliffe]
+
