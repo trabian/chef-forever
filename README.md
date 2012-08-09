@@ -1,10 +1,12 @@
 # chef-forever
 
-Chef cookbook for running node apps using forever.
+[Chef](http://www.opscode.com/chef/) cookbook for running node apps using [forever](https://github.com/nodejitsu/forever/).
 
 ## Installation
 
-Easiest way to install this cookbook is to use librarian-chef.
+Easiest way to install this cookbook is to use [librarian-chef](https://github.com/applicationsonline/librarian#librarian-chef).
+
+Add this to your Cheffile:
 
 ```ruby
 
