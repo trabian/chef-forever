@@ -32,7 +32,7 @@
 . /etc/init.d/functions
  
 NAME=<%= @name %>
-<% if @port %>PORT=<%= @port %> # Used for applications that need a PORT in the ENV<% end %>
+COMMAND=<%= @command || 'node' %>
 SOURCE_DIR=<%= @path %>
 SOURCE_FILE=<%= @script %>
 SCRIPT_OPTIONS=<%= @script_options %>
@@ -64,7 +64,7 @@ start() {
  
     # Launch the application
     daemon --user=root \
-      $forever start --pidFile $pidfile -l $logfile -p $forever_dir -a -d --sourceDir $SOURCE_DIR $SOURCE_FILE $SCRIPT_OPTIONS
+      <%= @env_options %> $forever start --pidFile $pidfile -l $logfile -p $forever_dir -a -d -c $COMMAND --sourceDir $SOURCE_DIR $SOURCE_FILE $SCRIPT_OPTIONS
     RETVAL=$?
   else
     echo "Instance already running"
