@@ -93,7 +93,8 @@ restart() {
 }
 
 getForeverId() {
-  $forever list -p $forever_dir | $sed -e 's/\x1b\[[0-9; ]*m//g' | $awk "\$6 && \$6 == \"$pid\" { gsub(/[\[\]]/, \"\", \$2); print \$2; }";
+  $forever columns set pid &> /dev/null
+  $forever list -p $forever_dir | $awk "\$3 && \$3 == \"$pid\" { gsub(/[\[\]]/, \"\", \$2); print \$2; }";
 }
  
 if [ -f $pidfile ]; then
@@ -103,6 +104,9 @@ else
 fi
 
 foreverid=$(getForeverId)
+
+# Reset forever columns
+$forever clear columns &> /dev/null
  
 case "$1" in
   start)
