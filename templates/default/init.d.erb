@@ -38,8 +38,10 @@ SOURCE_FILE=<%= @script %>
 SCRIPT_OPTIONS=<%= @script_options %>
  
 user=<%= @user%>
+group=<%= @group%>
 pidfile=/var/run/$NAME.pid
-logfile=/var/log/$NAME.log
+log_dir=<%= @log_dir || '/var/log/node' %>
+logfile=$log_dir/$NAME.log
 forever_dir=/var/run/forever
  
 node=node
@@ -55,15 +57,16 @@ start() {
  
   if [ "$foreverid" == "" ]; then
     # Create the log and pid files, making sure that 
-    # the target use has access to them
+    # the target user has access to them
+    mkdir -p $log_dir
     touch $logfile
-    chown $user $logfile
- 
+    chown $user:$group $logfile
+
     touch $pidfile
-    chown $user $pidfile
+    chown $user:$group $pidfile
  
     # Launch the application
-    daemon --user=root \
+    daemon --user=$user \
       <%= @env_options %> $forever start --pidFile $pidfile -l $logfile -p $forever_dir -a -d -c $COMMAND --sourceDir $SOURCE_DIR $SOURCE_FILE $SCRIPT_OPTIONS
     RETVAL=$?
   else
