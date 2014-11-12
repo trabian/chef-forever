@@ -1,1 +1,1 @@
-npm_package "forever"
+nodejs_npm "forever"
