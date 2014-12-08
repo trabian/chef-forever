@@ -64,7 +64,7 @@ start() {
  
     # Launch the application
     daemon --user=root \
-      <%= @env_options %> $forever start --pidFile $pidfile -l $logfile -p $forever_dir -a -d -c $COMMAND --sourceDir $SOURCE_DIR $SOURCE_FILE $SCRIPT_OPTIONS
+      <%= @env_options %> $forever start --pidfile $pidfile -l $logfile -p $forever_dir -a -d -c $COMMAND --sourceDir $SOURCE_DIR $SOURCE_FILE $SCRIPT_OPTIONS
     RETVAL=$?
   else
     echo "Instance already running"
