@@ -1,0 +1,27 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: centos-6.6
+
+suites:
+  - name: default
+    run_list:
+      - recipe[forever::default]
+    attributes:
+  - name: source
+    run_list:
+      - recipe[forever::default]
+    attributes:
+      nodejs:
+        install_method: source
+  - name: binary
+    run_list:
+      - recipe[forever::default]
+    attributes:
+      nodejs:
+        install_method: binary
